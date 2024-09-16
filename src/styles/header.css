@@ -1,4 +1,4 @@
-.link{
+.link {
     text-decoration: none;
     color: #000;
     font-family: var(--pop);
@@ -7,27 +7,42 @@
     font-weight: 500;
     line-height: normal;
 }
-#nav{
+
+#nav {
     display: flex;
-    flex-direction: row;
-    gap: 26px;
+    justify-content: space-between;
+    gap: 40px;
+    margin-left: 500px
 }
-#comp img{
-   width: 100px;
+
+#comp img {
+    width: 100px;
 }
-#cont{
+
+#cont {
     display: flex;
     justify-content: space-between;
 }
-#home{
+
+#home {
     text-decoration: none;
 }
-.gut{
+
+.gut {
     height: 83px;
-    background-color:  rgba(31, 31, 31, 0.85);;
+    background-color: rgba(31, 31, 31, 0.85);
+    ;
 }
-@media(max-width : 768px){
-    #nav{
-        flex-direction: column;
+
+.wis {
+    width: 100%;
+    position: sticky;
+    top: 0;
+
+}
+
+@media(max-width : 768px) {
+    #nav {
+        margin-left: 0px;
     }
 }

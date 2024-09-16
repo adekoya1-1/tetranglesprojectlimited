@@ -4,19 +4,18 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import logo from '../assets/logo.png'
+import logo from "../assets/logo.png";
 
 const Header = () => {
   return (
-    <div>
-      <Navbar expand="lg" className="gut">
+    <div className="wis">
+      <Navbar expand="lg" className="bg-body-secondary">
         <Container id="cont">
           <Link id="home" to="/">
-          <Navbar.Brand id="comp">
-              <img src={logo } alt="" />
+            <Navbar.Brand id="comp">
+              <img src={logo} alt="" />
             </Navbar.Brand>
           </Link>
-          <div>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto" id="nav">
@@ -37,7 +36,6 @@ const Header = () => {
                 </Link>
               </Nav>
             </Navbar.Collapse>
-          </div>
         </Container>
       </Navbar>
     </div>
