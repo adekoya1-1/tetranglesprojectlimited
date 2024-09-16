@@ -1,0 +1,33 @@
+.link{
+    text-decoration: none;
+    color: #000;
+    font-family: var(--pop);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+#nav{
+    display: flex;
+    flex-direction: row;
+    gap: 26px;
+}
+#comp img{
+   width: 100px;
+}
+#cont{
+    display: flex;
+    justify-content: space-between;
+}
+#home{
+    text-decoration: none;
+}
+.gut{
+    height: 83px;
+    background-color:  rgba(31, 31, 31, 0.85);;
+}
+@media(max-width : 768px){
+    #nav{
+        flex-direction: column;
+    }
+}

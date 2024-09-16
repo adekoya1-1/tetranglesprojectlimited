@@ -1,0 +1,92 @@
+.medvac{
+    width: 80%;
+    height: 610px;
+    background: #F7F7F7;
+    
+}
+#medvac{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+#renoc{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+.renoc{
+    width: 80%;
+    height: 610px;
+    background: white;
+}
+.medly p{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:  #2A2A2A;
+    font-family: var(--open);
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0.6px;
+    margin-top: 38px;
+}
+.hvac li{
+    color:  #2A2A2A;
+    font-family: var(--open);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: 0.6px;
+}
+#hvac{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+    margin-left: 134px;
+    margin-top: 100px;
+}
+#gag h3{
+    color:  #2A2A2A;
+    font-family: var(--rub);
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 25px;
+    margin-bottom: 38px;
+}
+.mals{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.mals button{
+    display: flex;
+    width: 230px;
+    height: 65px;
+    justify-content: center;
+    align-items: center;
+    border: 5px red solid;
+    background-color: transparent;
+    color: red;
+    font-family: var(--rub);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 1.4px;
+}
+@media(max-width:400px){
+    #medvac{
+        display: none;
+    }
+    #renoc{
+        display: none;
+    }
+}

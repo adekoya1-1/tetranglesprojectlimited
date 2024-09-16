@@ -1,0 +1,42 @@
+.quote{
+   text-align: center;
+    width: 588px;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+.quote h3{
+    color:  #2A2A2A;
+    text-align: center;
+    font-family: var(--rub);
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: 1.2px;
+    
+}
+.quote h6{
+    color:  #666;
+    text-align: center;
+    font-family: Rubik;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: 0.56px;
+}
+#quote{
+    display: flex;
+    align-items: center;    
+    justify-content: space-around;
+}
+@media(max-width: 500px){
+    .quote h3{
+        font-size: 22px;
+    }
+    .quote{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}

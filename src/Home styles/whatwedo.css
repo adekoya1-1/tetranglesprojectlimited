@@ -1,0 +1,98 @@
+.building h6 {
+  color: var(#2a2a2a);
+  font-family: var(--rub);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 50.4px;
+  width: 177px;
+  height: 40px;
+}
+
+.building p {
+  color: var(#666);
+  font-family: var(--open);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: 0.6px;
+  width: 275px;
+  height: 57px;
+}
+
+.buildings {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.image {
+  width: 56.411px;
+  height: 58.5px;
+  margin-right: 13px;
+}
+
+.do {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  width: 90%;
+}
+
+.ings {
+  display: flex;
+  flex-direction: column;
+}
+
+.alt {
+  display: flex;
+  flex-direction: column;
+}
+
+.elit {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+@media(min-width: 700px) {
+  .alt {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .elit{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .ings{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .buildings{
+    margin-left: 30px;
+  }
+}
+@media (min-width: 1200px){
+  .do{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+    .alt {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .elit {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  
+    .ings {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .building p{
+      width: 350px;
+    }
+}
