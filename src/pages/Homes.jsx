@@ -4,7 +4,7 @@ import Whatwedo from "../Home components/Whatwedo"
 import Eco from "../Home components/Eco"
 import ABanner from "../Home components/ABanner"
 import Testimonials from "../Home components/Testimonials"
-
+import Footer from '../components/Footer'
 const Homes = () => {
   return (
     <div>
