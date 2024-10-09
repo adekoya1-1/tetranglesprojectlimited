@@ -1,5 +1,5 @@
 .ln{
-    background-image: url(../assets/castle.png);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/castle.png");
     width: 100%;
     height: 569px;
     display: flex;

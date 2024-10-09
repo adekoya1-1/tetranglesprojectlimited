@@ -20,14 +20,13 @@ function App() {
       <Router>
         <Header/>
        <Routes>
-          <Route path='/' element={<Homes/> } />
+        <Route path='/' element={<Homes/> } />
         <Route path="/about" element={<About/>} />
         <Route path="/contact" element={<Contacts/>} />
         <Route path="/project" element={<Projects/>} />
         <Route path="/service" element={<Services/>} />
-          <Route path='/castle' element={ <Castle/>} />
+        <Route path='/castle' element={ <Castle/>} />
         </Routes>
-        <Footer/>
       </Router>
     </div>
   )

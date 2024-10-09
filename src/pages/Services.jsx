@@ -9,7 +9,7 @@ const Services = () => {
       <Sbanner />
       <BuildingConstruction />
       <Miniprojects />
-      
+      <Footer/>
     </div>
   )
 }

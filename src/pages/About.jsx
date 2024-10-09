@@ -10,7 +10,8 @@ const About = () => {
       <Aboutbanner />
       <Acompany />
       <Bridge />
-      <Quote/>
+      <Quote />
+      <Footer/>
     </div>
   )
 }

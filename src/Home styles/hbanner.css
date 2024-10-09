@@ -18,7 +18,7 @@
     letter-spacing: 1.4px; 
 }
 .hban{
-    background-image: url(../assets/conc.png);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../assets/conc.png");
     height: 628px;
     flex-shrink: 0;
     width: 100%;

@@ -12,7 +12,8 @@ const Homes = () => {
       <Whatwedo />
       <Eco />
       <ABanner />
-      <Testimonials/>
+      <Testimonials />
+      <Footer/>
     </div>
   )
 }

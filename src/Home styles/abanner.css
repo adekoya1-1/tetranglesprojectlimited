@@ -19,7 +19,8 @@
 }
 
 .aban {
-    background-image: url(../assets/saw.png);
+    
+    background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("../assets/saw.png");
     height: 714px;
     flex-shrink: 0;
     width: 100%;
