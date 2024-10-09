@@ -42,7 +42,7 @@ const Bridge = () => {
           </div>
         </div>
         <div id="img">
-          <img id="img" src={bridge} alt="" />
+          <img src={bridge} alt="" />
         </div>
       </div>
       <div id="section">
