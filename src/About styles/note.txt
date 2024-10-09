@@ -1,0 +1,29 @@
+ <div className="last">
+      <div className="contact">
+        <h4>contact stuff</h4>
+      </div>
+      <div className="stick">
+        <div className="foot">
+          <a href="">
+            <img src={facebook} alt="" />
+          </a>
+          <a href="">
+            <img src={twitter} alt="" />
+          </a>
+          <a href="">
+            <img src={link} alt="" />
+          </a>
+        </div>
+        <div className="footer">
+          <div>
+            <img src={location} alt="" />
+            <p>Road 26 House 8A Ikota Villa Estate, Lekki Lagos State</p>
+          </div>
+          <div>
+            <img src={phone} alt="" />
+            <p>+234 805 835 8897</p>
+          </div>
+          <div>
+            <img src={mail} alt="" />
+            <p>tetranglesproject@gmail.com</p>
+          </div>

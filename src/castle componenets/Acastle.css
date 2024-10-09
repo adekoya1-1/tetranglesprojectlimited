@@ -1,0 +1,31 @@
+.risus{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+.risus img{
+    width: 40%;
+    height: 324px;
+}
+.sapien{
+    width: 50%;
+}
+#main{
+    height: 700px;
+    margin-top: 100px;
+    width: 100%;
+}
+#closet img{
+    width: 30%;
+    height: 262px;
+}
+#closet{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+#closet p{
+    width: 60%;
+}

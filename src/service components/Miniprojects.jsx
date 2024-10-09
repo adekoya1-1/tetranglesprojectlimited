@@ -1,6 +1,7 @@
 import React from "react";
 import castle from "../assets/castle.png";
 import "../services styles/miniproject.css";
+import { Link } from "react-router-dom";
 
 const Miniprojects = () => {
   return (
@@ -18,7 +19,9 @@ const Miniprojects = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id et
               euismod bibendum adipiscing et orci, fermentum.{" "}
             </p>
-            <button>LEARN MORE</button>
+            <Link id="lincon" to="/castle">
+              <button>LEARN MORE</button>
+            </Link>
           </div>
         </div>
         <div id="one">
@@ -29,7 +32,9 @@ const Miniprojects = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id et
               euismod bibendum adipiscing et orci, fermentum.{" "}
             </p>
-            <button>LEARN MORE</button>
+            <Link id="lincon">
+              <button>LEARN MORE</button>
+            </Link>
           </div>
         </div>
         <div id="one">
@@ -40,13 +45,17 @@ const Miniprojects = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id et
               euismod bibendum adipiscing et orci, fermentum.{" "}
             </p>
-            <button>LEARN MORE</button>
+            <Link id="lincon">
+              <button>LEARN MORE</button>
+            </Link>
           </div>
         </div>
       </div>
-      <div id="all">
+      <div >
+        <Link to="/project" id="all">
         <button className="all">View All</button>
-        </div>
+        </Link>
+      </div>
     </div>
   );
 };

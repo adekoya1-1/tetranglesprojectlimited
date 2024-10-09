@@ -9,8 +9,8 @@ import logo from "../assets/logo.png";
 const Header = () => {
   return (
     <div className="wis">
-      <Navbar expand="lg" className="bg-body-secondary">
-        <Container id="cont">
+      <Navbar expand="md" className="bg-body-secondary">
+        <Container  id="cont">
           <Link id="home" to="/">
             <Navbar.Brand id="comp">
               <img src={logo} alt="" />
