@@ -7,7 +7,7 @@ export function LocalBusinessJsonLd() {
     name: "Tetrangles Projects Limited",
     alternateName: "Tetrangles",
     url: BASE_URL,
-    logo: `${BASE_URL}/logo.png`,
+    logo: `${BASE_URL}/logos.png`,
     image: `${BASE_URL}/og-image.jpg`,
     description:
       "Nigeria's premier construction and real estate company. 15+ years delivering luxury residential, commercial, and infrastructure projects across Lagos and West Africa.",
