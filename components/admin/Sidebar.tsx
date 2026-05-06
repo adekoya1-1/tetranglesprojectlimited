@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
@@ -40,20 +41,17 @@ export function Sidebar({ user }: SidebarProps) {
   const NavContent = () => (
     <div className="flex h-full flex-col">
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-white/10 px-5">
-        <div className="flex gap-0.5">
-          <span className="block h-5 w-1 bg-brand-orange" />
-          <span className="block h-5 w-1 bg-brand-orange opacity-65" />
-          <span className="block h-5 w-1 bg-brand-orange opacity-30" />
-        </div>
-        <div>
-          <p className="font-condensed text-base font-black uppercase leading-none text-white">
-            TETRANGLES
-          </p>
-          <p className="text-[9px] uppercase tracking-[0.2em] text-white/40">
-            Admin Portal
-          </p>
-        </div>
+      <div className="flex h-16 items-center justify-between border-b border-white/10 px-5">
+        <Image
+          src="/logo.png"
+          alt="Tetrangles Projects Limited"
+          width={100}
+          height={40}
+          className="h-10 w-auto object-contain"
+        />
+        <p className="text-[9px] uppercase tracking-[0.2em] text-white/40">
+          Admin
+        </p>
       </div>
 
       {/* Nav links */}

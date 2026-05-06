@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Instagram, Facebook } from "lucide-react";
 
 const services = [
@@ -49,20 +50,14 @@ export function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             {/* Logo */}
-            <Link href="/" className="mb-6 inline-flex items-center gap-3">
-              <div className="flex gap-0.5">
-                <span className="block h-7 w-1.5 bg-brand-orange" />
-                <span className="block h-7 w-1.5 bg-brand-orange opacity-65" />
-                <span className="block h-7 w-1.5 bg-brand-orange opacity-30" />
-              </div>
-              <div>
-                <span className="block font-condensed text-xl font-black uppercase leading-none tracking-tight text-white">
-                  TETRANGLES
-                </span>
-                <span className="block text-[9px] uppercase tracking-[0.25em] text-white/40">
-                  Projects Limited
-                </span>
-              </div>
+            <Link href="/" className="mb-6 inline-block">
+              <Image
+                src="/logo.png"
+                alt="Tetrangles Projects Limited"
+                width={160}
+                height={64}
+                className="h-16 w-auto object-contain"
+              />
             </Link>
 
             <p className="mb-4 text-sm italic text-brand-orange">

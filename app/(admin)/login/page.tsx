@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import { LoginForm } from "@/components/auth/LoginForm";
 
 export default function LoginPage() {
@@ -20,22 +21,18 @@ export default function LoginPage() {
 
       <div className="relative w-full max-w-md">
         {/* Logo */}
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-3">
-            <div className="flex gap-0.5">
-              <span className="block h-8 w-2 bg-brand-orange" />
-              <span className="block h-8 w-2 bg-brand-orange opacity-70" />
-              <span className="block h-8 w-2 bg-brand-orange opacity-40" />
-            </div>
-            <div>
-              <p className="font-condensed text-2xl font-black uppercase tracking-tight text-white">
-                TETRANGLES
-              </p>
-              <p className="text-xs uppercase tracking-widest text-white/40">
-                Admin Portal
-              </p>
-            </div>
-          </div>
+        <div className="mb-8 flex flex-col items-center gap-2">
+          <Image
+            src="/logo.png"
+            alt="Tetrangles Projects Limited"
+            width={160}
+            height={64}
+            className="h-16 w-auto object-contain"
+            priority
+          />
+          <p className="text-xs uppercase tracking-widest text-white/40">
+            Admin Portal
+          </p>
         </div>
 
         <Suspense fallback={

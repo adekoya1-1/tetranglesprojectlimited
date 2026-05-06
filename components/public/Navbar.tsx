@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -66,23 +67,17 @@ export function Navbar() {
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 group"
+              className="group flex items-center"
               aria-label="Tetrangles Projects Limited — Home"
             >
-              {/* Triple stripe motif from brand */}
-              <div className="flex gap-0.5 transition-transform duration-200 group-hover:scale-110">
-                <span className="block h-7 w-1.5 bg-brand-orange" />
-                <span className="block h-7 w-1.5 bg-brand-orange opacity-65" />
-                <span className="block h-7 w-1.5 bg-brand-orange opacity-30" />
-              </div>
-              <div>
-                <span className="block font-condensed text-xl font-black uppercase leading-none tracking-tight text-white">
-                  TETRANGLES
-                </span>
-                <span className="block text-[9px] uppercase tracking-[0.25em] text-white/50">
-                  Projects Limited
-                </span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Tetrangles Projects Limited"
+                width={140}
+                height={56}
+                className="h-14 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
