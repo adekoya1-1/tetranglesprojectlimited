@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum ProjectCategory {
+  RESIDENTIAL
+  COMMERCIAL
+  INFRASTRUCTURE
+  FACILITY_MANAGEMENT
+  REAL_ESTATE
+}
+
+enum InquiryStatus {
+  NEW
+  IN_REVIEW
+  CONTACTED
+  CONVERTED
+  CLOSED
+}
+
+// ─── Models ───────────────────────────────────────────────────────────────────
+
+model Project {
+  id          String          @id @default(cuid())
+  title       String
+  slug        String          @unique
+  description String          @db.Text
+  category    ProjectCategory
+  client      String?
+  location    String?
+  year        String?
+  startDate   DateTime?
+  endDate     DateTime?
+  features    String[]
+  featured    Boolean         @default(false)
+  published   Boolean         @default(false)
+  order       Int             @default(0)
+  images      ProjectImage[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([category])
+  @@index([published])
+  @@index([featured])
+}
+
+model ProjectImage {
+  id        String  @id @default(cuid())
+  url       String
+  publicId  String
+  alt       String?
+  isPrimary Boolean @default(false)
+  order     Int     @default(0)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
+
+model Inquiry {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  phone       String
+  service     String?
+  budget      String?
+  message     String        @db.Text
+  status      InquiryStatus @default(NEW)
+  source      String        @default("website")
+  adminNotes  String?       @db.Text
+  respondedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  bio       String?  @db.Text
+  imageUrl  String?
+  publicId  String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String   @db.Text
+  longDesc    String?  @db.Text
+  icon        String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteSettings {
+  id             String   @id @default("singleton")
+  whatsappNumber String   @default("+2348058358897")
+  phone2         String?
+  email          String   @default("tetrangleprojects@gmail.com")
+  address        String   @default("8A, Road 26, Ikota Villa Estate, Lagos")
+  instagram      String?  @default("@tetranglesprojectlimited")
+  facebook       String?  @default("Tetranglez project limited")
+  updatedAt      DateTime @updatedAt
+}

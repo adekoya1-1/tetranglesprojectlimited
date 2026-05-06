@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ─────────────────────────────────────────────────── */
+:root {
+  --brand-orange: #e03a1a;
+  --brand-orange-dark: #c13015;
+  --brand-charcoal: #1c1c1c;
+  --brand-white: #ffffff;
+}
+
+/* ─── Base Resets ────────────────────────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    @apply scroll-smooth antialiased;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  }
+
+  body {
+    @apply bg-white text-brand-charcoal;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-condensed tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-brand-orange text-white;
+  }
+
+  /* Remove default focus styles, add custom ones */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-orange;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+}
+
+/* ─── Component Utilities ───────────────────────────────────────────────────── */
+@layer components {
+  /* Container */
+  .container-custom {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  /* Section heading */
+  .section-label {
+    @apply inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-brand-orange;
+  }
+
+  .section-title {
+    @apply font-condensed text-4xl font-black uppercase leading-tight tracking-tight text-brand-charcoal md:text-5xl;
+  }
+
+  .section-title-light {
+    @apply font-condensed text-4xl font-black uppercase leading-tight tracking-tight text-white md:text-5xl;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-none bg-brand-orange px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-brand-orange-dark hover:shadow-orange active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-none border-2 border-brand-charcoal px-8 py-4 text-sm font-bold uppercase tracking-widest text-brand-charcoal transition-all duration-200 hover:bg-brand-charcoal hover:text-white active:scale-95;
+  }
+
+  .btn-outline-white {
+    @apply inline-flex items-center justify-center gap-2 rounded-none border-2 border-white px-8 py-4 text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-white hover:text-brand-charcoal active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-brand-charcoal transition-colors duration-200 hover:text-brand-orange;
+  }
+
+  /* Card */
+  .card {
+    @apply overflow-hidden bg-white shadow-card transition-shadow duration-300 hover:shadow-card-hover;
+  }
+
+  /* Orange accent bar (the /// triple stripe motif from brand) */
+  .brand-stripe::before {
+    content: "///";
+    @apply mr-3 font-black text-brand-orange;
+    letter-spacing: -0.1em;
+  }
+
+  /* Scroll bar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-brand-gray;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-orange rounded-full;
+  }
+}
+
+/* ─── Utility Overrides ─────────────────────────────────────────────────────── */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+
+  .clip-diagonal-reverse {
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+  }
+}
