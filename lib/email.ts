@@ -1,8 +1,6 @@
 import { Resend } from "resend";
 import type { InquiryInput } from "@/lib/validations";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const FROM = process.env.EMAIL_FROM ?? "noreply@tetrangles.com.ng";
 const TO = process.env.EMAIL_TO ?? "tetrangleprojects@gmail.com";
 
@@ -95,5 +93,6 @@ export async function sendInquiryNotification(
     </div>
   `;
 
+  const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({ from: FROM, to: TO, subject, html });
 }
