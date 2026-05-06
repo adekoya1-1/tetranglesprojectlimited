@@ -23,7 +23,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="mb-8 flex flex-col items-center gap-2">
           <Image
-            src="/logos.png"
+            src="/logos.jpeg"
             alt="Tetrangles Projects Limited"
             width={160}
             height={64}

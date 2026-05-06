@@ -52,7 +52,7 @@ export function Footer() {
             {/* Logo */}
             <Link href="/" className="mb-6 inline-block">
               <Image
-                src="/logos.png"
+                src="/logos.jpeg"
                 alt="Tetrangles Projects Limited"
                 width={160}
                 height={64}

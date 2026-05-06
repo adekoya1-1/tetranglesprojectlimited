@@ -43,7 +43,7 @@ export function Sidebar({ user }: SidebarProps) {
       {/* Logo */}
       <div className="flex h-16 items-center justify-between border-b border-white/10 px-5">
         <Image
-          src="/logos.png"
+          src="/logos.jpeg"
           alt="Tetrangles Projects Limited"
           width={100}
           height={40}

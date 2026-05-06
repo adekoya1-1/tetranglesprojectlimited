@@ -71,7 +71,7 @@ export function Navbar() {
               aria-label="Tetrangles Projects Limited — Home"
             >
               <Image
-                src="/logos.png"
+                src="/logos.jpeg"
                 alt="Tetrangles Projects Limited"
                 width={140}
                 height={56}
