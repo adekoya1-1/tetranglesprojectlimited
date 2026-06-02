@@ -41,23 +41,37 @@ export function ImageUploader({
       setError(null);
 
       try {
+        // Get a signed upload credential from our server (tiny request — no file data)
+        const signRes = await fetch("/api/upload/sign", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ folder: "tetrangles/projects" }),
+        });
+        if (!signRes.ok) throw new Error("Could not get upload credentials");
+        const { signature, timestamp, folder, cloudName, apiKey } = await signRes.json();
+
         const uploaded: UploadedImage[] = [];
         for (const file of toUpload) {
+          // Upload directly to Cloudinary from the browser — bypasses Vercel's 4.5 MB limit
           const formData = new FormData();
           formData.append("file", file);
+          formData.append("api_key", apiKey);
+          formData.append("timestamp", String(timestamp));
+          formData.append("signature", signature);
+          formData.append("folder", folder);
 
-          const res = await fetch("/api/upload", {
-            method: "POST",
-            body: formData,
-          });
+          const res = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+            { method: "POST", body: formData }
+          );
 
           if (!res.ok) {
             const data = await res.json();
-            throw new Error(data.error ?? "Upload failed");
+            throw new Error(data.error?.message ?? "Upload failed");
           }
 
           const data = await res.json();
-          uploaded.push({ url: data.url, publicId: data.publicId });
+          uploaded.push({ url: data.secure_url, publicId: data.public_id });
         }
         onChange([...value, ...uploaded]);
       } catch (err) {
