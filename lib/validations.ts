@@ -54,8 +54,8 @@ export const teamMemberSchema = z.object({
   name: z.string().min(2).max(200),
   role: z.string().min(2).max(200),
   bio: z.string().max(1000).optional(),
-  imageUrl: z.string().url().optional().or(z.literal("")),
-  publicId: z.string().max(200).optional(),
+  imageUrl: z.string().url().nullish().or(z.literal("")),
+  publicId: z.string().max(200).nullish(),
   order: z.number().int().min(0).default(0),
   isActive: z.boolean().default(true),
 });
