@@ -17,6 +17,7 @@ const quickLinks = [
   { label: "Contact Us", href: "/contact" },
 ];
 
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
