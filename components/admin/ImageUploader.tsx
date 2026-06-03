@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
-import { Upload, X, Loader2, ImageIcon } from "lucide-react";
+import { Upload, X, Loader2, ImageIcon, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface UploadedImage {
@@ -14,12 +14,14 @@ interface ImageUploaderProps {
   value: UploadedImage[];
   onChange: (images: UploadedImage[]) => void;
   maxImages?: number;
+  folder?: string;
 }
 
 export function ImageUploader({
   value,
   onChange,
   maxImages = 10,
+  folder = "tetrangles/projects",
 }: ImageUploaderProps) {
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -32,7 +34,7 @@ export function ImageUploader({
 
       const remaining = maxImages - value.length;
       if (remaining <= 0) {
-        setError(`Maximum ${maxImages} images allowed`);
+        setError(`Maximum ${maxImages} image${maxImages === 1 ? "" : "s"} allowed`);
         return;
       }
 
@@ -41,51 +43,93 @@ export function ImageUploader({
       setError(null);
 
       try {
-        // Get a signed upload credential from our server (tiny request — no file data)
+        // ── Step 1: Get a signed credential from our server ───────────────
+        // This is a tiny JSON request — no file data crosses Vercel's limit.
+        console.log("[ImageUploader] Requesting upload signature…");
         const signRes = await fetch("/api/upload/sign", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ folder: "tetrangles/projects" }),
+          body: JSON.stringify({ folder }),
         });
-        if (!signRes.ok) throw new Error("Could not get upload credentials");
-        const { signature, timestamp, folder, cloudName, apiKey } = await signRes.json();
 
+        const signData = await signRes.json();
+
+        if (!signRes.ok) {
+          // Surface the specific missing env vars so admins know what to fix
+          if (signData.missing?.length) {
+            const vars = (signData.missing as string[]).join(", ");
+            throw new Error(
+              `Cloudinary is not configured. Add these environment variables to Vercel: ${vars}`
+            );
+          }
+          throw new Error(signData.error ?? "Could not get upload credentials");
+        }
+
+        const { signature, timestamp, folder: signedFolder, cloudName, apiKey } = signData;
+
+        // Guard: these must never be undefined after the server-side check,
+        // but double-check on the client to catch misconfigured responses early.
+        if (!cloudName || !apiKey || !signature) {
+          console.error("[ImageUploader] Sign response missing fields:", {
+            cloudName,
+            apiKey: apiKey ? "present" : "missing",
+            signature: signature ? "present" : "missing",
+          });
+          throw new Error("Incomplete upload credentials received from server");
+        }
+
+        console.log(`[ImageUploader] Credentials OK — uploading to cloud "${cloudName}", folder "${signedFolder}"`);
+
+        // ── Step 2: Upload each file directly to Cloudinary ───────────────
+        // The browser POSTs straight to Cloudinary — Vercel never sees the binary.
         const uploaded: UploadedImage[] = [];
+
         for (const file of toUpload) {
-          // Upload directly to Cloudinary from the browser — bypasses Vercel's 4.5 MB limit
+          console.log(`[ImageUploader] Uploading "${file.name}" (${(file.size / 1024).toFixed(0)} KB)…`);
+
           const formData = new FormData();
-          formData.append("file", file);
-          formData.append("api_key", apiKey);
+          formData.append("file",      file);
+          formData.append("api_key",   apiKey);
           formData.append("timestamp", String(timestamp));
           formData.append("signature", signature);
-          formData.append("folder", folder);
+          formData.append("folder",    signedFolder);
 
-          const res = await fetch(
+          const uploadRes = await fetch(
             `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
             { method: "POST", body: formData }
           );
 
-          if (!res.ok) {
-            const data = await res.json();
-            throw new Error(data.error?.message ?? "Upload failed");
+          const uploadData = await uploadRes.json();
+
+          if (!uploadRes.ok) {
+            const msg = uploadData.error?.message ?? "Cloudinary upload failed";
+            console.error("[ImageUploader] Cloudinary error:", uploadData.error);
+            throw new Error(msg);
           }
 
-          const data = await res.json();
-          uploaded.push({ url: data.secure_url, publicId: data.public_id });
+          console.log(`[ImageUploader] ✓ Uploaded: ${uploadData.secure_url}`);
+          uploaded.push({
+            url:      uploadData.secure_url,
+            publicId: uploadData.public_id,
+          });
         }
+
         onChange([...value, ...uploaded]);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Upload failed");
+        const msg = err instanceof Error ? err.message : "Upload failed";
+        console.error("[ImageUploader] Upload error:", msg);
+        setError(msg);
       } finally {
         setUploading(false);
         if (inputRef.current) inputRef.current.value = "";
       }
     },
-    [value, onChange, maxImages]
+    [value, onChange, maxImages, folder]
   );
 
   const removeImage = async (index: number) => {
     const img = value[index];
+    // Best-effort server-side delete from Cloudinary
     try {
       await fetch("/api/upload", {
         method: "DELETE",
@@ -93,7 +137,7 @@ export function ImageUploader({
         body: JSON.stringify({ publicId: img.publicId }),
       });
     } catch {
-      // best-effort delete from Cloudinary; remove locally regardless
+      // If delete fails, the image stays in Cloudinary but is removed from the form
     }
     onChange(value.filter((_, i) => i !== index));
   };
@@ -115,9 +159,10 @@ export function ImageUploader({
           onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
           onDragLeave={() => setDragOver(false)}
           onDrop={handleDrop}
-          onClick={() => inputRef.current?.click()}
+          onClick={() => !uploading && inputRef.current?.click()}
           className={cn(
             "flex cursor-pointer flex-col items-center justify-center gap-2 border-2 border-dashed p-8 text-center transition-colors",
+            uploading && "cursor-not-allowed opacity-60",
             dragOver
               ? "border-brand-orange bg-orange-50"
               : "border-gray-300 hover:border-gray-400 hover:bg-gray-50"
@@ -133,21 +178,27 @@ export function ImageUploader({
               {uploading ? "Uploading…" : "Click or drag images here"}
             </p>
             <p className="text-xs text-gray-400">
-              PNG, JPG, WebP · max 10 MB each · up to {maxImages} images
+              PNG, JPG, WebP · max 10 MB each · up to {maxImages} image{maxImages === 1 ? "" : "s"}
             </p>
           </div>
           <input
             ref={inputRef}
             type="file"
             accept="image/*"
-            multiple
+            multiple={maxImages > 1}
             className="hidden"
             onChange={(e) => uploadFiles(e.target.files)}
           />
         </div>
       )}
 
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {/* Error display */}
+      {error && (
+        <div className="flex items-start gap-2 rounded border border-red-200 bg-red-50 px-3 py-2">
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
+          <p className="text-xs text-red-700">{error}</p>
+        </div>
+      )}
 
       {/* Preview grid */}
       {value.length > 0 && (
@@ -161,7 +212,6 @@ export function ImageUploader({
                 className="object-cover"
                 sizes="120px"
               />
-              {/* Primary badge */}
               {i === 0 && (
                 <span className="absolute left-1 top-1 bg-brand-orange px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">
                   Cover
