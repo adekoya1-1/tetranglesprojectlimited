@@ -74,9 +74,9 @@ export function TeamManager({ members: initial }: TeamManagerProps) {
     setError(null);
 
     const payload = {
-      name: form.name,
-      role: form.role,
-      bio: form.bio || null,
+      name: form.name.trim(),
+      role: form.role.trim(),
+      bio: form.bio.trim() || null,
       isActive: form.isActive,
       imageUrl: form.images[0]?.url ?? null,
       publicId: form.images[0]?.publicId ?? null,

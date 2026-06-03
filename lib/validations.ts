@@ -53,7 +53,7 @@ export type ProjectInput = z.infer<typeof projectSchema>;
 export const teamMemberSchema = z.object({
   name: z.string().min(2).max(200),
   role: z.string().min(2).max(200),
-  bio: z.string().max(1000).optional(),
+  bio: z.string().max(1000).nullish(),
   imageUrl: z.string().url().nullish().or(z.literal("")),
   publicId: z.string().max(200).nullish(),
   order: z.number().int().min(0).default(0),
