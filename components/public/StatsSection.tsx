@@ -21,13 +21,13 @@ const stats: Stat[] = [
     value: 50,
     suffix: "+",
     label: "Projects Completed",
-    description: "Across Lagos and South-West Nigeria",
+    description: "Across Nigeria and Africa",
   },
   {
     value: 5,
     suffix: "",
     label: "Core Services",
-    description: "End-to-end building solutions",
+    description: "End-to-end construction and real estate solutions",
   },
   {
     value: 100,

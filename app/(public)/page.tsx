@@ -76,7 +76,7 @@ export default async function HomePage() {
           <Reveal>
             <p className="section-label">What We Do</p>
             <h2 className="section-title mt-2 max-w-2xl">
-              End-to-End Building Solutions
+              End-to-End Construction & Real Estate Solutions
             </h2>
             <p className="mt-4 max-w-xl text-base text-brand-text-muted">
               From concept to completion, we offer five integrated construction
